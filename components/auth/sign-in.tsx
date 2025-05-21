@@ -2,7 +2,6 @@
 import React from "react";
 import CardWrapper from "../general/card-wrapper";
 import FormError from "../general/form-error";
-import FormSuccess from "../general/form-success";
 
 import { useAuthState } from "@/hooks/useAuthState";
 import LoginSchema from "@/lib/helpers/zod/login-schema";
@@ -21,18 +20,10 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-
+import { toast } from "sonner";
 const SignIn = () => {
   const router = useRouter();
-  const {
-    error,
-    success,
-    loading,
-    setSuccess,
-    setError,
-    setLoading,
-    resetState,
-  } = useAuthState();
+  const { error, loading, setError, setLoading, resetState } = useAuthState();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -58,7 +49,9 @@ const SignIn = () => {
             setLoading(true);
           },
           onSuccess: () => {
-            setSuccess("LoggedIn successfully");
+            toast("Login success", {
+              description: "Welcome back to DM-ACADEMY.",
+            });
             router.replace("/");
           },
           onError: (ctx) => {
@@ -119,7 +112,6 @@ const SignIn = () => {
             )}
           />
           <FormError message={error} />
-          <FormSuccess message={success} />
           <Button disabled={loading} type="submit" className="w-full">
             Login
           </Button>

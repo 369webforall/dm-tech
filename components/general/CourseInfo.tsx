@@ -16,9 +16,10 @@ const CourseInfo = () => {
               </p>
             </div>
             <div className="p-4 rounded-lg bg-gray-50">
+              <p className="font-bold">Starting Date: June 16, 2025</p>
               <p>
                 <span className="font-semibold">Class Time:</span> 1 Hour/Day
-                (Mon–Fri)
+                (Mon-Fri) @ 7:45 PM to 8:45 PM
               </p>
             </div>
             <div className="p-4 rounded-lg bg-gray-50">
@@ -37,7 +38,11 @@ const CourseInfo = () => {
           <p className="text-sm text-gray-500 mt-4">
             Limited-time offer available for early enrollments in 2025!
           </p>
-          <p>For any question visit faq page</p>
+
+          <p>
+            <span className="text-orange-700">Important</span> for any question
+            visit faq page
+          </p>
           <Link href="/faq" className={buttonVariants({ size: "lg" })}>
             FAQ
           </Link>

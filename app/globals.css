@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -114,9 +124,42 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Force scrollbar to always be visible to prevent layout shifts */
+html {
+  overflow-y: scroll;
+}
+
+/* For browsers that support it, use overlay scrollbars */
+@supports (scrollbar-width: thin) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  }
+}
+
+/* For Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.7);
+}
+
+/* Prevent content jumps when modals open */
+body.overflow-hidden {
+  padding-right: 8px; /* Width of the scrollbar */
 }

@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
 import CardWrapper from "../general/card-wrapper";
 import FormError from "../general/form-error";
-import FormSuccess from "../general/form-success";
+
 import { useAuthState } from "@/hooks/useAuthState";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { toast } from "sonner";
+import type { z } from "zod";
 import {
   Form,
   FormControl,
@@ -14,24 +14,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { SignupSchema } from "@/lib/helpers/zod/signup-schema";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const SignUp = () => {
   const router = useRouter();
-  const {
-    error,
-    success,
-    loading,
-    setLoading,
-    setError,
-    setSuccess,
-    resetState,
-  } = useAuthState();
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get("ref");
+  const { error, loading, setLoading, setError, resetState } = useAuthState();
 
   const form = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
@@ -39,11 +35,46 @@ const SignUp = () => {
       name: "",
       email: "",
       password: "",
+      referralCode: referralCode || "",
     },
   });
 
+  // const onSubmit = async (values: z.infer<typeof SignupSchema>) => {
+  //   try {
+  //     await signUp.email(
+  //       {
+  //         name: values.name,
+  //         email: values.email,
+  //         password: values.password,
+  //         referralCode: values.referralCode,
+  //       },
+  //       {
+  //         onResponse: () => {
+  //           setLoading(false);
+  //         },
+  //         onRequest: () => {
+  //           resetState();
+  //           setLoading(true);
+  //         },
+  //         onSuccess: () => {
+  //           toast("Account created", {
+  //             description: "Check your email for verification link.",
+  //           });
+  //           router.replace("/");
+  //         },
+  //         onError: (ctx) => {
+  //           setError(ctx.error.message);
+  //         },
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast("Something went wrong");
+  //   }
+  // };
   const onSubmit = async (values: z.infer<typeof SignupSchema>) => {
     try {
+      // First sign up the user
       await signUp.email(
         {
           name: values.name,
@@ -58,8 +89,28 @@ const SignUp = () => {
             resetState();
             setLoading(true);
           },
-          onSuccess: () => {
-            setSuccess("User has been created");
+          onSuccess: async () => {
+            // Then handle the referral code if it exists
+            if (values.referralCode) {
+              try {
+                await fetch("/api/referrals", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    email: values.email,
+                    referralCode: values.referralCode,
+                  }),
+                });
+              } catch (error) {
+                console.error("Failed to process referral code:", error);
+              }
+            }
+
+            toast("Account created", {
+              description: "Check your email for verification link.",
+            });
             router.replace("/");
           },
           onError: (ctx) => {
@@ -69,10 +120,9 @@ const SignUp = () => {
       );
     } catch (error) {
       console.error(error);
-      setError("Something went wrong");
+      toast("Something went wrong");
     }
   };
-
   return (
     <CardWrapper
       cardTitle="SignUp"
@@ -137,8 +187,29 @@ const SignUp = () => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="referralCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Referral Code (Optional)</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={loading}
+                    type="text"
+                    placeholder="Enter referral code"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  If you have a referral code, enter it here
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormError message={error} />
-          <FormSuccess message={success} />
+
           <Button disabled={loading} type="submit" className="w-full">
             Submit
           </Button>
