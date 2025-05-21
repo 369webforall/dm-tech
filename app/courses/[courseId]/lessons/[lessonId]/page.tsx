@@ -172,7 +172,7 @@ export default async function LessonPage({
   const { courseId, lessonId } = await params;
 
   if (!user) {
-    redirect("/login");
+    redirect("/signin");
   }
 
   // Check if user has student role

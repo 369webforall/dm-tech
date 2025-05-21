@@ -16,7 +16,7 @@ const CourseInfo = () => {
               </p>
             </div>
             <div className="p-4 rounded-lg bg-gray-50">
-              <p className="font-bold">Starting Date: June 16, 2025</p>
+              <p className="font-bold">Starting Date: June 23, 2025</p>
               <p>
                 <span className="font-semibold">Class Time:</span> 1 Hour/Day
                 (Mon-Fri) @ 7:45 PM to 8:45 PM
@@ -37,6 +37,10 @@ const CourseInfo = () => {
 
           <p className="text-sm text-gray-500 mt-4">
             Limited-time offer available for early enrollments in 2025!
+          </p>
+          <p className="text-sm text-purple-600 my-2">
+            Join our Discord channel for communication.{" "}
+            <Link href="/contact">Contact</Link>
           </p>
 
           <p>
