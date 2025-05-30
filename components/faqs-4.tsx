@@ -20,7 +20,7 @@ export default function FAQsFour() {
       id: "item-2",
       question: "Who can join this course?",
       answer:
-        "Anyone with a passion for web development! Whether you’re a beginner or someone looking to sharpen your skills, this course is designed to guide you step-by-step.",
+        "This course is ideal for anyone interested in web development — from Class 6 students to those pursuing degrees like BCA, BIT, or MCA. Whether you're a complete beginner or looking to build a solid foundation, we guide you step-by-step.",
     },
     {
       id: "item-3",
@@ -32,13 +32,13 @@ export default function FAQsFour() {
       id: "item-4",
       question: "What is the class schedule?",
       answer:
-        "Live classes are held Monday to Friday, from 7:30 PM to 8:30 PM. That’s 1 hour daily of structured, focused learning.",
+        "Live classes are held Monday to Friday, from 7:45 PM to 8:45 PM. That&#39;s 1 hour daily of structured, focused learning.",
     },
     {
       id: "item-5",
       question: "Will there be real-world projects?",
       answer:
-        "Absolutely! After the MERN Stack phase, you’ll build multiple full-stack projects, including production-level apps, to showcase your skills in portfolios and job interviews.",
+        "Absolutely! After the MERN Stack phase, you&#39;ll build multiple full-stack projects, including production-level apps, to showcase your skills in portfolios and job interviews.",
     },
     {
       id: "item-6",
@@ -46,17 +46,18 @@ export default function FAQsFour() {
       answer:
         "No prior coding experience is required. We start from the basics and gradually progress to advanced topics, making it beginner-friendly.",
     },
+
     {
       id: "item-7",
-      question: "Do I need any prior experience?",
+      question: "What is the course fee and are there any discounts?",
       answer:
-        "No prior coding experience is required. We start from the basics and gradually progress to advanced topics, making it beginner-friendly.",
+        "The course fee is RS:9000. However, as part of our opening year special offer, we are giving a 50% discount — you can enroll for just RS:4500",
     },
     {
       id: "item-8",
-      question: "What is the course fee and are there any discounts?",
+      question: "Is there a one-time payment for full course access?",
       answer:
-        "The course fee is ₹9000. However, as part of our opening year special offer, we are giving a 50% discount — you can enroll for just ₹4500!",
+        "Yes, the full course fee is RS:9000. As part of our opening year special offer, you can enroll for just RS:4500. While it's a one-time fee, we also offer the flexibility to pay in two parts to make it more convenient for students.",
     },
     {
       id: "item-9",
@@ -130,6 +131,18 @@ export default function FAQsFour() {
               Student support
             </Link>
           </p>
+          <p className="text-muted-foreground mt-6 px-8">
+            {" "}
+            Join our discord channel for all other information regarding class
+          </p>
+          <a
+            href="https://discord.gg/F2zmZrBH24"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 font-medium hover:underline"
+          >
+            discord.gg/F2zmZrBH24
+          </a>
         </div>
       </div>
     </section>

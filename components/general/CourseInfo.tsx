@@ -24,28 +24,30 @@ const CourseInfo = () => {
             </div>
             <div className="p-4 rounded-lg bg-gray-50">
               <p>
-                <span className="font-semibold">Fee:</span> ₹9000
+                <span className="font-semibold">Fee:</span> RS: 9000
               </p>
             </div>
             <div className="p-4 rounded-lg bg-green-50 border border-green-400">
               <p className="text-green-700 font-semibold">
                 Opening Year Discount: 50% Off 🎉
               </p>
-              <p className="text-sm text-green-600 mt-1">(Pay only ₹4500!)</p>
+              <p className="text-sm text-green-600 mt-1">(Pay only RS:4500)</p>
             </div>
           </div>
 
           <p className="text-sm text-gray-500 mt-4">
             Limited-time offer available for early enrollments in 2025!
           </p>
-          <p className="text-sm text-purple-600 my-2">
-            Join our Discord channel for communication.{" "}
-            <Link href="/contact">Contact</Link>
+          <p className="text-md my-2">
+            Join our Discord channel for communication.
+            <Link href="/contact" className="hover:border-b-2 text-orange-400">
+              Contact
+            </Link>
           </p>
 
           <p>
-            <span className="text-orange-700">Important</span> for any question
-            visit faq page
+            <span className="text-orange-700">Important: </span> for any
+            question visit faq page
           </p>
           <Link href="/faq" className={buttonVariants({ size: "lg" })}>
             FAQ
