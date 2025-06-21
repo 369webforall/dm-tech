@@ -4,7 +4,8 @@ import { getCurrentUser, isStudent } from "@/lib/auths";
 import prisma from "@/lib/prisma";
 import { CourseHeader } from "@/components/courses/course-header";
 import { CourseSidebar } from "@/components/courses/course-sidebar";
-import { VideoPlayer } from "@/components/courses/video-player";
+
+import BunnyVideo from "@/components/video/Bunny";
 import { LessonActions } from "@/components/courses/lesson-actions";
 import { markLessonComplete } from "@/actions/lesson-actions";
 import { unstable_cache } from "next/cache";
@@ -101,7 +102,7 @@ async function LessonContent({
     <>
       <h1 className="text-2xl font-bold mb-4">{lesson.name}</h1>
 
-      <VideoPlayer videoId={lesson.youtubeVideoId || ""} />
+      <BunnyVideo link={lesson.youtubeVideoId} />
 
       {lesson.description && (
         <div className="mt-6 prose max-w-none">

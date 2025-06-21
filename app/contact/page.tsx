@@ -1,5 +1,5 @@
 import { Mail, Users } from "lucide-react";
-
+import BunnyVideo from "@/components/video/BunnyVideo";
 export default function ContactPage() {
   return (
     <section className="min-h-screen py-16 px-6 bg-background text-foreground">
@@ -33,6 +33,10 @@ export default function ContactPage() {
             >
               discord.gg/F2zmZrBH24
             </a>
+          </div>
+
+          <div className="my-4 w-full max-w-xl">
+            <BunnyVideo />
           </div>
         </div>
       </div>
